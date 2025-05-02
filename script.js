@@ -1,44 +1,50 @@
-//your JS code here. If required.
+
 let form = document.querySelector("form")
-let ageInputBox = document.querySelector("#age")
-let nameInputBox = document.querySelector("#name")
+let agebox = document.querySelector("#age")
+let nameBox = document.querySelector("#name")
 
 
-form.addEventListener("submit", handleSubmit)
+form.addEventListener("submit",handleSubmit)
 
 
-function handleSubmit(e){
+ function handleSubmit(e){
 	e.preventDefault();
-	let name = nameInputBox.value;
-	let age = ageInputBox.value
-		if(!name|| !age){
-			alert("Please enter valid detials")
-			return
-		}
 
-function checkAge(p1){
-
-	let promise = new Promise((resolve,reject)=>{
-
-		setTimeout((resolve,reject)=>{
-			if(p1>=18){
-				resolve(p1)
-			}
-			else{
-				reject(p1)
-			}
-		})
-	})
-
-				return promise
+	let name = nameBox.value;
+	let age = parseInt(agebox.value);
+if(!name || !age){
+	alert("Please enter valid details.")
+	return
 }
 
-	let age = checkAge(age)
-	age.then(response=>{
-		alert("You can vote")
+
+function handlePromise(){
+	
+	let promise = new Promise((resolve,reject)=>{
+
+		setTimeout(()=>{
+			if(age>18){
+					resolve(`Welcome, ${name} . You can vote.`)
+			}
+			else{
+				reject(`Oh sorry ${name} . You aren't old enough.`)
+			}
+		},4000)
 	})
-	age.catch(err =>{
-		alert("Oh sorry . You aren't old enough")
-	})
+
+		return promise
+}
+
+
+handlePromise()
+	 .then((response)=>{
+		 alert(response)
+	 })
+	 .catch((error)=>{
+		 alert(error)
+	 })
+	 
+
+	 
 }
 
